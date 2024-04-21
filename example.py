@@ -19,9 +19,9 @@ twitch_miner = TwitchChannelPointsMiner(
     password="write-your-secure-psw",           # If no password will be provided, the script will ask interactively
     claim_drops_startup=False,                  # If you want to auto claim all drops from Twitch inventory on the startup
     priority=[                                  # Custom priority in this case for example:
-        Priority.STREAK,                        # - We want first of all to catch all watch streak from all streamers
+        Priority.ORDER,                        # - We want first of all to catch all watch streak from all streamers
         Priority.DROPS,                         # - When we don't have anymore watch streak to catch, wait until all drops are collected over the streamers
-        Priority.ORDER                          # - When we have all of the drops claimed and no watch-streak available, use the order priority (POINTS_ASCENDING, POINTS_DESCENDING)
+        Priority.STREAK                          # - When we have all of the drops claimed and no watch-streak available, use the order priority (POINTS_ASCENDING, POINTS_DESCENDING)
     ],
     enable_analytics=False,                     # Disables Analytics if False. Disabling it significantly reduces memory consumption
     disable_ssl_cert_verification=False,        # Set to True at your own risk and only to fix SSL: CERTIFICATE_VERIFY_FAILED error
@@ -89,7 +89,7 @@ twitch_miner = TwitchChannelPointsMiner(
             stealth_mode=True,                  # If the calculated amount of channel points is GT the highest bet, place the highest value minus 1-2 points Issue #33
             delay_mode=DelayMode.FROM_END,      # When placing a bet, we will wait until `delay` seconds before the end of the timer
             delay=6,
-            minimum_points=20000,               # Place the bet only if we have at least 20k points. Issue #113
+            minimum_points=1000000,               # Place the bet only if we have at least 20k points. Issue #113
             filter_condition=FilterCondition(
                 by=OutcomeKeys.TOTAL_USERS,     # Where apply the filter. Allowed [PERCENTAGE_USERS, ODDS_PERCENTAGE, ODDS, TOP_POINTS, TOTAL_USERS, TOTAL_POINTS]
                 where=Condition.LTE,            # 'by' must be [GT, LT, GTE, LTE] than value
